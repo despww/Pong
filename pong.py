@@ -1,4 +1,4 @@
-import pygame, sys, random
+import pygame, sys, random, asyncio
 
 def ball_animation():
     global ball_speed_x, ball_speed_y, player_score, Ai_score, score_time
@@ -31,7 +31,7 @@ def ball_animation():
             ball_speed_y *= -1
         elif abs(ball.top - Ai.bottom) < 10 and ball_speed_y < 0:
             ball_speed_y *= -1
-    
+
 def player_animation():
     player.y += player_speed
     if player.top <= 0:
@@ -70,7 +70,7 @@ def ball_restart():
         ball_speed_y = 7 * random.choice((1,-1))
         ball_speed_x = 7 * random.choice((1,-1))
         score_time = None
-
+        
 #General setup
 pygame.init()
 clock = pygame.time.Clock()
@@ -120,7 +120,7 @@ while True:
                 player_speed -=7
             if event.key == pygame.K_UP:
                 player_speed +=7
-    
+
     #Game Logic
     ball_animation()
     player_animation()
