@@ -1,5 +1,4 @@
-import pygame, sys, random, asyncio
-
+import pygame, sys, random
 def ball_animation():
     global ball_speed_x, ball_speed_y, player_score, Ai_score, score_time
     ball.x += ball_speed_x
