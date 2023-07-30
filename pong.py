@@ -16,8 +16,22 @@ def ball_animation():
         Ai_score += 1
         score_time = pygame.time.get_ticks()
 
-    if ball.colliderect(player) or ball.colliderect(Ai):
-        ball_speed_x *= -1
+    if ball.colliderect(player) and ball_speed_x > 0:
+        if abs(ball.right - player.left) < 10:
+            ball_speed_x *= -1
+        elif abs(ball.bottom - player.top) < 10 and ball_speed_y > 0:
+            ball_speed_y *= -1
+        elif abs(ball.top - player.bottom) < 10 and ball_speed_y < 0:
+            ball_speed_y *= -1
+
+    if ball.colliderect(Ai) and ball_speed_x < 0:
+        if abs(ball.left - Ai.right) < 10:
+            ball_speed_x *= -1
+        elif abs(ball.bottom - Ai.top) < 10 and ball_speed_y > 0:
+            ball_speed_y *= -1
+        elif abs(ball.top - Ai.bottom) < 10 and ball_speed_y < 0:
+            ball_speed_y *= -1
+    
 def player_animation():
     player.y += player_speed
     if player.top <= 0:
@@ -82,7 +96,7 @@ ball_speed_y = 7 * random.choice((1,-1))
 player_speed = 0
 Ai_speed = 7
 
-#Text Variables
+#Score Text
 player_score = 0
 Ai_score = 0
 game_font = pygame.font.Font("freesansbold.ttf",32)
